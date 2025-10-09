@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Portfólio</title>
+    <link rel="stylesheet" href="/public/css/main.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Cursor Personalizado -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursorFollower"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <h2>Portfólio</h2>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#skills">Habilidades</a></li>
+                <li><a href="#projects">Projetos</a></li>
+                <li><a href="#contact">Contato</a></li>
+            </ul>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-text" data-aos="fade-up">
+                <h2 class="hero-title">
+                    Olá, eu sou <span class="highlight">Tridon José Acácio</span>
+                </h2>
+                <p class="hero-subtitle">Desenvolvedor Full Stack</p>
+                <p class="hero-description">
+                    <h3>Transformando ideias em realidade digital</h3>
+                    <p>
+                        Sou um desenvolvedor full stack apaixonado por criar soluções inovadoras 
+                        e eficientes. Com experiência em diversas tecnologias, busco sempre 
+                        entregar produtos de alta qualidade que superem as expectativas.
+                    </p>
+                </p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">Ver Projetos</a>
+                    <a href="#contact" class="btn btn-secondary">Entrar em Contato</a>
+                </div>
+            </div>
+            <div class="hero-image" data-aos="fade-left">
+                <div class="image-container">
+                    <img src="/public/img/2024_07_21_13_48_IMG_1940.JPG" alt="Profile">
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Minhas Habilidades</h2>
+            <div class="skills-grid">
+                <div class="skill-card" data-aos="flip-left">
+                    <div class="skill-icon">
+                        <i class="fab fa-html5"></i>
+                    </div>
+                    <h3>Frontend</h3>
+                    <p>HTML5, CSS, JavaScript, React</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="90%"></div>
+                    </div>
+                </div>
+                <div class="skill-card" data-aos="flip-left" data-aos-delay="100">
+                    <div class="skill-icon">
+                        <i class="fab fa-java"></i>
+                    </div>
+                    <h3>Backend</h3>
+                    <p>Java Spring boot,Node.js, PHP, Banco de Dados</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="85%"></div>
+                    </div>
+                </div>
+                <div class="skill-card" data-aos="flip-left" data-aos-delay="200">
+                    <div class="skill-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile</h3>
+                    <p>Flutter, Android</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="80%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Meus Projetos</h2>
+            <div class="projects-grid">
+                <div class="project-card" data-aos="zoom-in">
+                    <div class="project-image">
+                        <img src="/public/img/progect1.png" alt="Projeto 1">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                                <a href="#" class="project-link"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Gestão de estoque completamente online</h3>
+                        <p>Plataforma de Gestão de estoque com React+electron js e JAVA-Spring</p>
+                        <div class="project-tags">
+                            <span class="tag">React</span>
+                            <span class="tag">Eletron js</span>
+                            <span class="tag">JAVA-Spring boot</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="project-image">
+                        <img src="/public/img/progecto3.jpg" alt="Projeto 2">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                                <a href="#" class="project-link"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Gestão de estoque restaurante e bar</h3>
+                        <p>Aplicativo de gerenciamento de estoque restaurante e bar hibrido online e web com troca automatica</p>
+                        <div class="project-tags">
+                            <span class="tag">React.js</span>
+                            <span class="tag">Eletron js</span>
+                            <span class="tag">JAVA-Spring</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="project-image">
+                        <img src="/public/img/progecto2.png" alt="Projeto 3">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                                <a href="#" class="project-link"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Gestão de estoque complectamente offline</h3>
+                        <p>Gestão de mesas desktop</p>
+                        <div class="project-tags">
+                            <span class="tag">Swing</span>
+                            <span class="tag">Java</span>
+                            <span class="tag">Hibernet</span>
+                            <span class="tag">SQL+JPQL</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Vamos Trabalhar Juntos?</h2>
+            <div class="contact-content">
+                <div class="contact-info" data-aos="fade-right">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>tridonjoseacacio"gmail.com</p>
+                            <p>gsinfo.27gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Telefone</h4>
+                            <p>+258 (87) 805 1058</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Localização</h4>
+                            <p>Maputo, Urbanização </p>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; Tridon José Acácio. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="/public/js/main.js"></script>
+</body>
+</html>
