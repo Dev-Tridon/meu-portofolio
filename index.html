@@ -1,108 +1,85 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Portfólio</title>
-    <link rel="stylesheet" href="/public/css/main.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <title>Tridon José | Global Code Architect & Full Stack Developer</title>
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/public/css/main.css">
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loading-screen" id="loadingScreen">
-        <div class="loader"></div>
-    </div>
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
 
-    <!-- Cursor Personalizado -->
-    <div class="cursor" id="cursor"></div>
-    <div class="cursor-follower" id="cursorFollower"></div>
+    <!-- Navigation -->
+    <nav class="global-nav">
+        <div class="logo">Tridon José</div>
+        
+        <!-- Mobile Menu Toggle -->
+        <button class="mobile-menu-toggle" id="mobileMenuToggle">
+            <i class="fas fa-bars"></i>
+        </button>
 
-    <!-- Header -->
-    <header class="header">
-        <nav class="nav">
-            <div class="nav-brand">
-                <h2>Portfólio</h2>
+        <!-- Desktop Navigation -->
+        <div class="nav-links" id="navLinks">
+            <a href="#home" class="nav-link" data-lang="nav.home">Início</a>
+            <a href="#projects" class="nav-link" data-lang="nav.projects">Projetos</a>
+            <a href="#expertise" class="nav-link" data-lang="nav.expertise">Especialidades</a>
+            <a href="#contact" class="nav-link" data-lang="nav.contact">Contato</a>
+            <a href="#contact" class="nav-cta" data-lang="nav.cta">Colaborar</a>
+            
+            <!-- Language Selector - Now inside nav -->
+            <div class="language-selector">
+                <button class="lang-btn active" onclick="changeLanguage('pt')" data-lang="lang.pt">PT</button>
+                <button class="lang-btn" onclick="changeLanguage('en')" data-lang="lang.en">EN</button>
+                <button class="lang-btn" onclick="changeLanguage('es')" data-lang="lang.es">ES</button>
             </div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#skills">Habilidades</a></li>
-                <li><a href="#projects">Projetos</a></li>
-                <li><a href="#contact">Contato</a></li>
-            </ul>
-            <div class="nav-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero">
+    <section id="home" class="hero-section">
         <div class="hero-content">
-            <div class="hero-text" data-aos="fade-up">
-                <h2 class="hero-title">
-                    Olá, eu sou <span class="highlight">Tridon José Acácio</span>
-                </h2>
-                <p class="hero-subtitle">Desenvolvedor Full Stack</p>
-                <p class="hero-description">
-                    <h3>Transformando ideias em realidade digital</h3>
-                    <p>
-                        Sou um desenvolvedor full stack apaixonado por criar soluções inovadoras 
-                        e eficientes. Com experiência em diversas tecnologias, busco sempre 
-                        entregar produtos de alta qualidade que superem as expectativas.
-                    </p>
+            <div class="hero-text" data-aos="fade-right" data-aos-duration="1000">
+                <div class="profession-tag">
+                    <i class="fas fa-code"></i>
+                    <span data-lang="hero.tag">Desenvolvedor</span>
+                </div>
+                <h1 class="hero-title">
+                    <span data-lang="hero.greeting">Olá, sou</span><br>
+                    <span class="highlight">Tridon José Acácio</span>
+                </h1>
+                <h2 class="hero-subtitle" data-lang="hero.subtitle">Full Stack Developer</h2>
+                <p class="hero-description" data-lang="hero.description">
+                    Desenvolvedor de Software com experiência em backend e aplicações web.
+Atuo na construção de sistemas estáveis, escaláveis e bem estruturados, alinhados às necessidades do negócio.
                 </p>
-                <div class="hero-buttons">
-                    <a href="#projects" class="btn btn-primary">Ver Projetos</a>
-                    <a href="#contact" class="btn btn-secondary">Entrar em Contato</a>
+                <div class="cta-buttons">
+                    <button class="global-btn btn-primary" onclick="document.getElementById('projects').scrollIntoView({behavior: 'smooth'})">
+                        <i class="fas fa-rocket"></i> <span data-lang="hero.cta.projects">Ver Projetos</span>
+                    </button>
+                    <button class="global-btn btn-secondary" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">
+                        <i class="fas fa-envelope"></i> <span data-lang="hero.cta.contact">Contato</span>
+                    </button>
                 </div>
             </div>
-            <div class="hero-image" data-aos="fade-left">
-                <div class="image-container">
-                    <img src="/public/img/2024_07_21_13_48_IMG_1940.JPG" alt="Profile">
-                </div>
-            </div>
-        </div>
-        <div class="scroll-indicator">
-            <div class="scroll-arrow"></div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">Minhas Habilidades</h2>
-            <div class="skills-grid">
-                <div class="skill-card" data-aos="flip-left">
-                    <div class="skill-icon">
-                        <i class="fab fa-html5"></i>
+            <div class="hero-visual" data-aos="fade-left" data-aos-duration="1200">
+                <div class="profile-container">
+                    <div class="profile-image-wrapper">
+                        <img src="/public/img/2024_07_21_13_48_IMG_1940.JPG" alt="Tridon José Acácio">
                     </div>
-                    <h3>Frontend</h3>
-                    <p>HTML5, CSS, JavaScript, React</p>
-                    <div class="skill-bar">
-                        <div class="skill-progress" data-width="90%"></div>
-                    </div>
-                </div>
-                <div class="skill-card" data-aos="flip-left" data-aos-delay="100">
-                    <div class="skill-icon">
-                        <i class="fab fa-java"></i>
-                    </div>
-                    <h3>Backend</h3>
-                    <p>Java Spring boot,Node.js, PHP, Banco de Dados</p>
-                    <div class="skill-bar">
-                        <div class="skill-progress" data-width="85%"></div>
-                    </div>
-                </div>
-                <div class="skill-card" data-aos="flip-left" data-aos-delay="200">
-                    <div class="skill-icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <h3>Mobile</h3>
-                    <p>Flutter, Android</p>
-                    <div class="skill-bar">
-                        <div class="skill-progress" data-width="80%"></div>
+                    <div class="profile-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">3+</div>
+                            <div class="stat-label" data-lang="stats.projects">Projetos</div>
+                        </div>
+                        
+                        <div class="stat-item">
+                            <div class="stat-number">99%</div>
+                            <div class="stat-label" data-lang="stats.satisfaction">Satisfação</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -110,68 +87,140 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">Meus Projetos</h2>
-            <div class="projects-grid">
-                <div class="project-card" data-aos="zoom-in">
-                    <div class="project-image">
-                        <img src="/public/img/progect1.png" alt="Projeto 1">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
-                                <a href="#" class="project-link"><i class="fab fa-github"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Gestão de estoque completamente online</h3>
-                        <p>Plataforma de Gestão de estoque com React+electron js e JAVA-Spring</p>
-                        <div class="project-tags">
-                            <span class="tag">React</span>
-                            <span class="tag">Eletron js</span>
-                            <span class="tag">JAVA-Spring boot</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="project-image">
-                        <img src="/public/img/progecto3.jpg" alt="Projeto 2">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
-                                <a href="#" class="project-link"><i class="fab fa-github"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Gestão de estoque restaurante e bar</h3>
-                        <p>Aplicativo de gerenciamento de estoque restaurante e bar hibrido online e web com troca automatica</p>
-                        <div class="project-tags">
-                            <span class="tag">React.js</span>
-                            <span class="tag">Eletron js</span>
-                            <span class="tag">JAVA-Spring</span>
+    <section id="projects" class="projects-section">
+        <div class="section-header">
+            <h2 class="section-title" data-lang="projects.title">Projetos Activos</h2>
+            <p class="section-subtitle" data-lang="projects.subtitle">
+                Soluções empresariais que transcendem fronteiras, combinando tecnologia de ponta com 
+                design sofisticado para clientes globais.
+            </p>
+        </div>
+        <div class="projects-grid">
+            <!-- Project 1 -->
+            <div class="project-card" data-aos="fade-up" data-aos-delay="0">
+                <div class="project-badge" data-lang="projects.premium">Mercearia</div>
+                <div class="project-image">
+                    <img src="/public/img/progect1.png" alt="Global Inventory System">
+                    <div class="project-overlay">
+                        <div class="project-links">
+                            <a href="#" class="project-link" title="Live Demo">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <a href="#" class="project-link" title="Case Study">
+                                <i class="fas fa-file-alt"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div class="project-card" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="project-image">
-                        <img src="/public/img/progecto2.png" alt="Projeto 3">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
-                                <a href="#" class="project-link"><i class="fab fa-github"></i></a>
-                            </div>
+                <div class="project-content">
+                    <div class="project-header">
+                        <div class="project-number">01</div>
+                    </div>
+                    <h3 class="project-title" data-lang="projects.project1.title">Sistema de Vendas  RestFull</h3>
+                    <p class="project-description" data-lang="projects.project1.description">
+                        Sistema de gestão de estoques e análise de dados em tempo real. 
+                
+                    </p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Electron Js</span>
+                        <span class="tech-tag">Spring Boot</span>
+                        <span class="tech-tag">Java 17+</span>
+                         <span class="tech-tag">Node+</span>
+                        <span class="tech-tag">MySQL</span>
+                    </div>
+                    <div class="project-stats">
+                        
+                        <div class="project-stat">
+                            <div class="project-stat-value">99%</div>
+                            <div class="project-stat-label" data-lang="projects.stats.efficiency">Satisfação</div>
                         </div>
                     </div>
-                    <div class="project-info">
-                        <h3>Gestão de estoque complectamente offline</h3>
-                        <p>Gestão de mesas desktop</p>
-                        <div class="project-tags">
-                            <span class="tag">Swing</span>
-                            <span class="tag">Java</span>
-                            <span class="tag">Hibernet</span>
-                            <span class="tag">SQL+JPQL</span>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="project-badge" data-lang="projects.multilingual">GSInfo</div>
+                <div class="project-image">
+                    <img src="/public/img/progecto3.jpg" alt="Hospitality Management Suite">
+                    <div class="project-overlay">
+                        <div class="project-links">
+                            <a href="#" class="project-link" title="Live Demo">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <a href="#" class="project-link" title="Case Study">
+                                <i class="fas fa-file-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <div class="project-header">
+                        <div class="project-number">02</div>
+                    </div>
+                    <h3 class="project-title" data-lang="projects.project2.title">Super moderno e adaptavel RestFull</h3>
+                    <p class="project-description" data-lang="projects.project2.description">
+                        Solução completa para Mercearias, barres e restaurantes com suporte a versao mobile  
+                        Sistema híbrido que funciona offline e sincroniza automaticamente. permite uma escabilidade horizontal.
+                    </p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Java 17+</span>
+                        <span class="tech-tag">Electron js</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">MySQL</span>
+                        <span class="tech-tag">Postgre</span>
+                        <span class="tech-tag">WebSockets</span>
+                        <span class="tech-tag">SSE</span>
+                        <span class="tech-tag">Web Client</span>
+                    </div>
+                    <div class="project-stats">
+                        
+                        <div class="project-stat">
+                            <div class="project-stat-value">3+</div>
+                            <div class="project-stat-label" data-lang="projects.stats.clients">Clientes</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="project-badge" data-lang="projects.enterprise">Mobile PWA</div>
+                <div class="project-image">
+                    <img src="/public/img/pwa.jpg" alt="Enterprise Desktop Solution">
+                    <div class="project-overlay">
+                        <div class="project-links">
+                            <a href="#" class="project-link" title="Live Demo">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <a href="#" class="project-link" title="Case Study">
+                                <i class="fas fa-file-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <div class="project-header">
+                        <div class="project-number">03</div>
+                    </div>
+                    <h3 class="project-title" data-lang="projects.project3.title">Versao Mobile do GSInfo</h3>
+                    <p class="project-description" data-lang="projects.project3.description">
+                        Corporativa para gestão empresarial com processamento de dados avançado e relatórios 
+                        em tempo real. Sistema robusto para alta disponibilidade e segurança.
+                    </p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Java 17+</span>
+                        <span class="tech-tag">Spring</span>
+                        <span class="tech-tag">Hibernate</span>
+                        <span class="tech-tag">Postgre</span>
+                        <span class="tech-tag">Node js(Express)</span>
+                        <span class="tech-tag">RestFull</span>
+                    </div>
+                    <div class="project-stats">
+                        
+                        <div class="project-stat">
+                            <div class="project-stat-value">0</div>
+                            <div class="project-stat-label" data-lang="projects.stats.downtime">Integrado ao Kit GSInfo apois acompra </div>
                         </div>
                     </div>
                 </div>
@@ -180,52 +229,130 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">Vamos Trabalhar Juntos?</h2>
-            <div class="contact-content">
-                <div class="contact-info" data-aos="fade-right">
-                    <div class="contact-item">
+    <section id="contact" class="contact-section">
+        <div class="section-header">
+            <h2 class="section-title" data-lang="contact.title">Conecte-se Globalmente</h2>
+            <p class="section-subtitle" data-lang="contact.subtitle">
+                Pronto para levar seu projeto ao próximo nível? Vamos criar algo extraordinário juntos.
+            </p>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-info">
+                <div class="contact-item" data-aos="fade-right" data-aos-delay="0">
+                    <div class="contact-icon">
                         <i class="fas fa-envelope"></i>
-                        <div>
-                            <h4>Email</h4>
-                            <p>tridonjoseacacio"gmail.com</p>
-                            <p>gsinfo.27gmail.com</p>
-                        </div>
                     </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <div>
-                            <h4>Telefone</h4>
-                            <p>+258 (87) 805 1058</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div>
-                            <h4>Localização</h4>
-                            <p>Maputo, Urbanização </p>
-                        </div>
-                    </div>
-                    <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-                        
+                    <div class="contact-text">
+                        <h3 data-lang="contact.email.title">Email</h3>
+                        <p>tridon@globaldev.tech</p>
+                        <p>contact@tridonjose.com</p>
                     </div>
                 </div>
-                
+                <div class="contact-item" data-aos="fade-right" data-aos-delay="100">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h3 data-lang="contact.phone.title"></h3>
+                        <p>(+258) 87 805 1058</p>
+                        <p>So chamadas</p>
+                    </div>
+
+                    <div class="contact-text">
+                        <h3 data-lang="contact.phone.title"></h3>
+                        <p>(+258) 844883000</p>
+                        <p>Disponível via WhatsApp</p>
+                    </div>
+                </div>
+                <div class="contact-item" data-aos="fade-right" data-aos-delay="200">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h3 data-lang="contact.location.title">Localização</h3>
+                        <p data-lang="contact.location.mozambique">Maputo, Moçambique</p>
+                        <p data-lang="contact.location.remote">Trabalho Remoto e Presencial no territorio nacional</p>
+                        <p data-lang="contact.location.remote">Trabalho Remoto no territorio internacionail</p>
+                    </div>
+                </div>
+                <div class="contact-item" data-aos="fade-right" data-aos-delay="300">
+                    <div class="contact-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h3 data-lang="contact.social.title">Conecte-se</h3>
+                        <div class="social-links">
+                            <a href="https://linkedin.com/in/tridonjose" class="social-link" target="_blank">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="https://github.com/tridonjoseacacio" class="social-link" target="_blank">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://github.com/gsinfo-27" class="social-link" target="_blank" aria-placeholder="gsinfo-27">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            
+                            <a href="https://wa.me/258844883000" class="social-link" target="_blank">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <form class="contact-form" id="contactForm" data-aos="fade-left">
+                <div class="form-group">
+                    <label class="form-label" data-lang="contact.form.name">Nome Completo *</label>
+                    <input type="text" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" data-lang="contact.form.email">Email *</label>
+                    <input type="email" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" data-lang="contact.form.company">Empresa / Projeto</label>
+                    <input type="text" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" data-lang="contact.form.project">Mensagem *</label>
+                    <textarea class="form-input" required placeholder="Conte-me sobre seu projeto..."></textarea>
+                </div>
+                <button type="submit" class="global-btn btn-primary" style="width: 100%; padding: 16px;">
+                    <i class="fas fa-paper-plane"></i> <span data-lang="contact.form.submit">Enviar Mensagem</span>
+                </button>
+            </form>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; Tridon José Acácio. Todos os direitos reservados.</p>
+    <footer class="global-footer">
+        <div class="footer-content">
+            <div class="footer-logo">Tridon José</div>
+            <p class="footer-text" data-lang="footer.mission">
+                Arquiteto de soluções digitais globais, especializado em criar sistemas sofisticados 
+                que impulsionam negócios internacionais e conectam culturas através da tecnologia.
+            </p>
+            <div class="footer-contact">
+                <div class="footer-contact-item">
+                    <div class="footer-contact-label" data-lang="footer.available">Disponibilidade</div>
+                    <div class="footer-contact-value" data-lang="footer.timezone">Sempre que disponivel</div>
+                </div>
+                <div class="footer-contact-item">
+                    <div class="footer-contact-label" data-lang="footer.response">Resposta</div>
+                    <div class="footer-contact-value" data-lang="footer.hours">24-48 horas</div>
+                </div>
+                <div class="footer-contact-item">
+                    <div class="footer-contact-label" data-lang="footer.modality">Modalidade</div>
+                    <div class="footer-contact-value" data-lang="footer.remote">Remoto / Presencial</div>
+                </div>
+            </div>
+            <p class="copyright">
+                © GSInfo Tridon José Acácio. <span data-lang="footer.rights">Todos os direitos reservados.</span>
+            </p>
         </div>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="/public/js/main.js"></script>
+    <script src="/public/src/main.js"></script>
+    <script src="/public/src/email.js"></script>
 </body>
 </html>
