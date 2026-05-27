@@ -23,26 +23,6 @@ body {
     z-index: -2;
 }
 
-/* ========== LOADING ========== */
-.loading-translate {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: linear-gradient(90deg, #2563eb, #1d4ed8);
-    animation: loading 0.5s ease-in-out infinite;
-    z-index: 10000;
-    display: none;
-}
-
-@keyframes loading {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
-}
-
-.loading-translate.active { display: block; }
-
 /* ========== NAVIGATION ========== */
 .global-nav {
     position: fixed;
@@ -114,24 +94,9 @@ body {
     color: #4a4a4a;
     font-weight: 500;
     transition: color 0.2s;
-    position: relative;
 }
 
 .nav-link:hover { color: #2563eb; }
-
-.nav-link.active {
-    color: #2563eb !important;
-}
-
-.nav-link.active::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: #2563eb;
-}
 
 .nav-cta {
     background: #2563eb;
@@ -140,13 +105,9 @@ body {
     border-radius: 30px;
     text-decoration: none;
     font-weight: 500;
-    transition: all 0.3s ease;
 }
 
-.nav-cta:hover {
-    background: #1d4ed8;
-    transform: translateY(-2px);
-}
+.nav-cta:hover { background: #1d4ed8; }
 
 .language-selector {
     display: flex;
@@ -182,7 +143,7 @@ body {
     .container { padding: 0 1.2rem; }
 }
 
-/* ========== HERO SECTION ========== */
+/* ========== HERO ========== */
 .hero-section {
     padding: 8rem 0 4rem;
     min-height: 100vh;
@@ -256,10 +217,7 @@ body {
 }
 
 @media (max-width: 968px) {
-    .hero-description {
-        margin-left: auto;
-        margin-right: auto;
-    }
+    .hero-description { margin: 0 auto 2rem; }
 }
 
 .cta-buttons {
@@ -278,15 +236,11 @@ body {
     font-weight: 600;
     font-size: 0.85rem;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s;
     border: none;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-}
-
-.global-btn i {
-    font-size: 0.9rem;
 }
 
 .btn-primary {
@@ -297,7 +251,6 @@ body {
 .btn-primary:hover {
     background: #1d4ed8;
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
 }
 
 .btn-secondary {
@@ -362,8 +315,8 @@ body {
     opacity: 0.8;
 }
 
-/* ========== PROJECTS SECTION ========== */
-.projects-section {
+/* ========== PROJECTS ========== */
+.projects-section, .expertise-section, .contact-section {
     padding: 5rem 0;
 }
 
@@ -499,12 +452,7 @@ body {
     color: #6b6b6b;
 }
 
-/* ========== EXPERTISE SECTION (ESPECIALIDADES) ========== */
-.expertise-section {
-    padding: 5rem 0;
-    background: #f8fafc;
-}
-
+/* ========== EXPERTISE ========== */
 .tech-stack-grid {
     display: flex;
     flex-wrap: wrap;
@@ -521,9 +469,7 @@ body {
     border-radius: 40px;
     font-size: 0.85rem;
     font-weight: 500;
-    color: #1a1a1a;
     transition: all 0.3s ease;
-    cursor: default;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
@@ -536,16 +482,10 @@ body {
 
 .tech-stack-item:hover {
     border-color: #2563eb;
-    background: #ffffff;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
 }
 
-/* ========== CONTACT SECTION ========== */
-.contact-section {
-    padding: 5rem 0;
-}
-
+/* ========== CONTACT ========== */
 .contact-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -573,22 +513,6 @@ body {
     font-size: 1.2rem;
 }
 
-.contact-icon i {
-    font-size: 1.2rem;
-}
-
-.contact-text h3 {
-    font-size: 0.85rem;
-    color: #6b6b6b;
-    margin-bottom: 0.2rem;
-    font-weight: 500;
-}
-
-.contact-text p {
-    font-weight: 500;
-    color: #1a1a1a;
-}
-
 .social-links {
     display: flex;
     gap: 0.8rem;
@@ -605,17 +529,12 @@ body {
     justify-content: center;
     color: #4a4a4a;
     text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-.social-link i {
-    font-size: 1.1rem;
+    transition: all 0.2s;
 }
 
 .social-link:hover {
     background: #2563eb;
     color: white;
-    transform: translateY(-3px);
 }
 
 .contact-form {
@@ -643,14 +562,12 @@ body {
     border-radius: 10px;
     font-family: inherit;
     font-size: 0.85rem;
-    transition: all 0.3s ease;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
     border-color: #2563eb;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
 textarea {
@@ -658,15 +575,13 @@ textarea {
     resize: vertical;
 }
 
-/* ========== FOOTER CORRIGIDO COM FONT AWESOME ========== */
+/* ========== FOOTER ========== */
 .global-footer {
     background: #1a1a1a;
     color: #94a3b8;
     text-align: center;
     padding: 3rem 2rem 2rem;
     margin-top: 4rem;
-    position: relative;
-    width: 100%;
 }
 
 .footer-logo {
@@ -683,8 +598,6 @@ textarea {
     max-width: 600px;
     margin: 0 auto 2rem;
     font-size: 0.85rem;
-    line-height: 1.6;
-    color: #94a3b8;
 }
 
 .footer-contact {
@@ -695,41 +608,17 @@ textarea {
     margin-bottom: 2rem;
 }
 
-.footer-contact > div {
-    text-align: center;
-}
-
-.footer-contact-label {
-    font-size: 0.7rem;
-    font-weight: 600;
-    color: #2563eb;
-    margin-bottom: 0.3rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.4rem;
-}
-
 .footer-contact-label i {
-    font-size: 0.7rem;
-}
-
-.footer-contact-value {
-    font-size: 0.8rem;
-    color: #94a3b8;
+    margin-right: 0.3rem;
 }
 
 .copyright {
     font-size: 0.7rem;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding-top: 2rem;
-    margin-top: 1rem;
-    color: #6b7280;
 }
 
-/* ========== RESPONSIVO ========== */
+/* ========== RESPONSIVE ========== */
 @media (max-width: 768px) {
     .projects-grid {
         grid-template-columns: 1fr;
@@ -748,22 +637,9 @@ textarea {
         padding: 0.4rem 1rem;
         font-size: 0.75rem;
     }
-    
-    .expertise-section {
-        padding: 3rem 0;
-    }
 }
 
 @media (max-width: 480px) {
-    .tech-stack-grid {
-        gap: 0.5rem;
-    }
-    
-    .tech-stack-item {
-        padding: 0.3rem 0.8rem;
-        font-size: 0.7rem;
-    }
-    
     .hero-title {
         font-size: 1.8rem;
     }
@@ -772,81 +648,9 @@ textarea {
         width: 150px;
         height: 150px;
     }
-}
-
-/* ========== SPA TRANSITIONS ========== */
-.page {
-    display: none;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
-                transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.page.active {
-    display: block;
-    animation: pageEnter 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-@keyframes pageEnter {
-    0% {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
+    
+    .tech-stack-item {
+        padding: 0.3rem 0.8rem;
+        font-size: 0.7rem;
     }
 }
-
-.page-transition-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(8px);
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-}
-
-.page-transition-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.page-transition-overlay .spinner {
-    width: 50px;
-    height: 50px;
-    border: 3px solid #e2e8f0;
-    border-top-color: #2563eb;
-    border-radius: 50%;
-    animation: spin 0.6s linear infinite;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-.tech-stack-item i {
-    margin-right: 0.5rem;
-    font-size: 1rem;
-}
-
-/* Cores específicas para cada ícone (opcional) */
-.tech-stack-item .fa-react { color: #61dafb; }
-.tech-stack-item .fa-bolt { color: #ffca28; }
-.tech-stack-item .fa-java { color: #e76f00; }
-.tech-stack-item .fa-leaf { color: #6db33f; }
-.tech-stack-item .fa-node-js { color: #339933; }
-.tech-stack-item .fa-docker { color: #2496ed; }
-.tech-stack-item .fa-database { color: #4479a1; }
-.tech-stack-item .fa-key { color: #f0ad4e; }
-.tech-stack-item .fa-wifi { color: #2563eb; }
-.tech-stack-item .fa-sync-alt { color: #28a745; }

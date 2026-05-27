@@ -1,14 +1,7 @@
-// ========== DICIONÁRIO DE TRADUÇÕES COMPLETO ==========
+// ========== DICIONÁRIO DE TRADUÇÕES ==========
 
 const translations = {
     pt: {
-        // Navegação
-        'nav.home': 'Início',
-        'nav.projects': 'Projetos',
-        'nav.expertise': 'Especialidades',
-        'nav.contact': 'Contato',
-        'nav.cta': 'Colaborar',
-        
         // Hero
         'hero.tag': 'Desenvolvedor',
         'hero.greeting': 'Olá, sou',
@@ -21,7 +14,7 @@ const translations = {
         'stats.projects': 'Projetos',
         'stats.satisfaction': 'Satisfação',
         
-        // Projetos
+        // Projects
         'projects.title': 'Projetos Activos',
         'projects.subtitle': 'Soluções empresariais que transcendem fronteiras, combinando tecnologia de ponta.',
         'projects.stats.clients': 'Clientes',
@@ -35,8 +28,8 @@ const translations = {
         // Projeto 2
         'project2.badge': 'React + Vite',
         'project2.title': 'Garçom Digital - PWA',
-        'project2.description': 'Aplicativo PWA com React + Vite. Online ou Offline por Intranet conectado através de QR Code, sincronização automática e notificações push.',
-        'project2.stat1': 'Offline',
+        'project2.description': 'Aplicativo PWA com React + Vite. Online ou Offline via QR Code, sincronização automática.',
+        'project2.stat1': 'Híbrido',
         'project2.stat2': 'Sync',
         
         // Projeto 3
@@ -48,7 +41,7 @@ const translations = {
         'project3.stat2.value': 'Escalável',
         'project3.stat2.label': 'Horizontal',
         
-        // Contato
+        // Contact
         'contact.title': 'Conecte-se Globalmente',
         'contact.subtitle': 'Pronto para levar seu projeto ao próximo nível? Vamos criar algo extraordinário juntos.',
         'contact.email.title': 'Email',
@@ -76,14 +69,8 @@ const translations = {
         'expertise.title': 'Tech Stack',
         'expertise.subtitle': 'Tecnologias que domino no dia a dia'
     },
+    
     en: {
-        // Navigation
-        'nav.home': 'Home',
-        'nav.projects': 'Projects',
-        'nav.expertise': 'Expertise',
-        'nav.contact': 'Contact',
-        'nav.cta': 'Collaborate',
-        
         // Hero
         'hero.tag': 'Developer',
         'hero.greeting': 'Hi, I am',
@@ -105,13 +92,13 @@ const translations = {
         // Project 1
         'project1.badge': 'Electron',
         'project1.title': 'GSInfo Desktop - Electron',
-        'project1.description': 'Desktop application with Electron JS. Complete system for managing restaurants, bars and pools.',
+        'project1.description': 'Desktop application with Electron JS. Complete system for restaurants, bars and pools.',
         
         // Project 2
         'project2.badge': 'React + Vite',
         'project2.title': 'Digital Waiter - PWA',
-        'project2.description': 'PWA app with React + Vite. Online or Offline via Intranet connected via QR Code, automatic synchronization and push notifications.',
-        'project2.stat1': 'Offline',
+        'project2.description': 'PWA app with React + Vite. Online/Offline via QR Code, automatic sync.',
+        'project2.stat1': 'Hybrid',
         'project2.stat2': 'Sync',
         
         // Project 3
@@ -151,14 +138,8 @@ const translations = {
         'expertise.title': 'Tech Stack',
         'expertise.subtitle': 'Technologies I master daily'
     },
+    
     es: {
-        // Navigation
-        'nav.home': 'Inicio',
-        'nav.projects': 'Proyectos',
-        'nav.expertise': 'Especialidades',
-        'nav.contact': 'Contacto',
-        'nav.cta': 'Colaborar',
-        
         // Hero
         'hero.tag': 'Desarrollador',
         'hero.greeting': 'Hola, soy',
@@ -177,19 +158,19 @@ const translations = {
         'projects.stats.clients': 'Clientes',
         'projects.stats.efficiency': 'Satisfacción',
         
-        // Project 1
+        // Proyecto 1
         'project1.badge': 'Electron',
         'project1.title': 'GSInfo Desktop - Electron',
-        'project1.description': 'Aplicación de escritorio con Electron JS. Sistema completo para gestión de restaurantes, bares y piscinas.',
+        'project1.description': 'Aplicación de escritorio con Electron JS. Sistema completo para restaurantes, bares y piscinas.',
         
-        // Project 2
+        // Proyecto 2
         'project2.badge': 'React + Vite',
         'project2.title': 'Camarero Digital - PWA',
-        'project2.description': 'App PWA con React + Vite. Online o Offline vía Intranet conectado mediante código QR, sincronización automática y notificaciones push.',
-        'project2.stat1': 'Offline',
+        'project2.description': 'App PWA con React + Vite. Online/Offline vía QR Code, sincronización automática.',
+        'project2.stat1': 'Híbrido',
         'project2.stat2': 'Sync',
         
-        // Project 3
+        // Proyecto 3
         'project3.badge': 'Multi-tenant',
         'project3.title': 'Backend Multi-tenant',
         'project3.description': 'Arquitectura multi-tenant con Spring Boot y Node.js. Aislamiento de datos por cliente y escalabilidad horizontal.',
