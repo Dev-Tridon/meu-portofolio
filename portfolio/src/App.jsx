@@ -4,7 +4,7 @@ import {
   MapPin, MessageCircle, CheckCircle, Terminal, Server, Layers, 
   TerminalSquare, Eye, ArrowRight, Menu, X, Sparkles, 
   ChevronLeft, ChevronRight, ArrowLeft, Home, FolderKanban, 
-  Cpu, MessageSquare,
+  Cpu, MessageSquare, Copy, Check, HelpCircle, Trash2, UserCheck, ShieldCheck,
   Atom, Zap, AppWindow, Braces, Coffee, Leaf, Hexagon, Boxes, Container
 } from 'lucide-react';
 import { translations, themes } from './data/translations';
@@ -18,7 +18,7 @@ const PROJECTS_DATA = [
   { 
     key: 'project1', 
     icon: Monitor, 
-    image: '/img/projetos/img1.png', 
+    image: '/img/projetos/02_Dashboard_Principal_1920x1080_HD.png', 
     tech: 'Electron JS + Spring Boot', 
     arch: 'Desktop corporate architecture with local database sync.' 
   },
@@ -64,7 +64,7 @@ const THEME_HEX = {
   violet:  '#8b5cf6'
 };
 
-const BG = 'bg-[#e6e6e6]';
+const BG = 'bg-slate-50/80';
 
 const DOCK_ITEMS = [
   { id: 'home',      icon: Home,          labelPt: 'Início',    labelEn: 'Home' },
@@ -91,9 +91,12 @@ export default function App() {
   const [hoveredDock, setHoveredDock] = useState(null);
 
   const [terminalInput, setTerminalInput] = useState('');
+  const [copiedEmail, setCopiedEmail] = useState(false);
+  const terminalContainerRef = useRef(null);
+  const isInitialMount = useRef(true);
   const [terminalHistory, setTerminalHistory] = useState([
-    { type: 'system', text: 'Tridon OS v4.5 [Secure Enterprise Core]' },
-    { type: 'system', text: 'Digite "ajuda" para ver os comandos disponíveis.' }
+    { type: 'system', text: 'Tridon OS v4.5 [Secure Enterprise Core] - Maputo Primary Node' },
+    { type: 'system', text: 'Digite "ajuda" ou clique nos comandos rápidos para interagir.' }
   ]);
 
   const projectsScrollRef = useRef(null);
@@ -202,36 +205,65 @@ export default function App() {
     }
   }, []);
 
-  const handleTerminalSubmit = useCallback((e) => {
-    e.preventDefault();
-    const cmd = terminalInput.trim().toLowerCase();
+  const executeCommand = useCallback((cmdString) => {
+    const raw = cmdString || '';
+    const cmd = raw.trim().toLowerCase();
     if (!cmd) return;
 
     if (cmd === 'clear' || cmd === 'cls') {
-      setTerminalHistory([{ type: 'system', text: 'Terminal limpo.' }]);
+      setTerminalHistory([{ type: 'system', text: 'Terminal reinicializado.' }]);
       setTerminalInput('');
       return;
     }
 
     const commands = {
-      help: 'Comandos: skills, projetos, contato, clear, status',
-      ajuda: 'Comandos: skills, projetos, contato, clear, status',
-      skills: 'Stack: React, Vite, Electron, Java Spring Boot, Node.js, PostgreSQL, Redis.',
-      projetos: '1. GSInfo Desktop Suite | 2. Garçom Digital PWA | 3. Core Multi-tenant',
-      projects: '1. GSInfo Desktop Suite | 2. Garçom Digital PWA | 3. Core Multi-tenant',
-      contato: 'Email: tridonjose.acacio@gsinfo.co.mz | WhatsApp: +258 84 488 3000',
-      status: 'Sistema Operacional: 100% Estável | Servidor: Maputo-01',
+      help: 'Comandos disponíveis:\n- whoami: Perfil arquitetural do engenheiro\n- skills: Stack técnica completa\n- projetos: Portfólio de soluções corporativas\n- contato: Canais diretos de comunicação\n- status: Métricas e saúde do sistema\n- clear: Limpar histórico do terminal',
+      ajuda: 'Comandos disponíveis:\n- whoami: Perfil arquitetural do engenheiro\n- skills: Stack técnica completa\n- projetos: Portfólio de soluções corporativas\n- contato: Canais diretos de comunicação\n- status: Métricas e saúde do sistema\n- clear: Limpar histórico do terminal',
+      whoami: 'Arquiteto: Tridon José Acácio\nFunção: Software Architect & Tech Lead\nEspecialidade: Sistemas Distribuídos, Desktop Corporativo e Offline-First\nDisponibilidade: Consultorias Enterprise e Novos Desafios\nLocalização: Maputo, Moçambique / Remoto Internacional',
+      skills: 'Stack de Engenharia:\n- Backend: Java 17+, Spring Boot, Node.js, REST APIs, WebSockets\n- Desktop: Electron JS, sincronização local SQLite/PostgreSQL\n- Frontend: React 19, Vite, Tailwind CSS, PWA Offline-First\n- Dados & Infra: PostgreSQL, Redis, Docker, Arquitetura Multi-tenant',
+      projetos: '1. GSInfo Desktop Suite (Electron + Spring Boot)\n2. Garçom Digital Offline-First (React PWA + WebSockets)\n3. Core Backend Distribuído (Multi-tenant Spring Boot + Redis)',
+      projects: '1. GSInfo Desktop Suite (Electron + Spring Boot)\n2. Digital Waiter Offline-First (React PWA + WebSockets)\n3. Distributed Core Backend (Multi-tenant Spring Boot + Redis)',
+      contato: 'Email: tridonjose.acacio@gsinfo.co.mz\nWhatsApp: (+258) 84 488 3000\nLocal: Maputo, Moçambique',
+      contact: 'Email: tridonjose.acacio@gsinfo.co.mz\nWhatsApp: (+258) 84 488 3000\nLocation: Maputo, Mozambique',
+      status: 'Status Operacional: 100% Estável | Nó Ativo: Maputo-Primary-Core | Uptime: 99.99%',
     };
 
-    const output = commands[cmd] || `Comando desconhecido: "${terminalInput}". Digite "ajuda".`;
+    const output = commands[cmd] || `Comando não reconhecido: "${raw}". Digite "ajuda" para listar os comandos.`;
 
     setTerminalHistory(prev => [
       ...prev,
-      { type: 'user', text: `$ ${terminalInput}` },
+      { type: 'user', text: `$ ${raw}` },
       { type: 'output', text: output }
     ]);
     setTerminalInput('');
-  }, [terminalInput]);
+  }, []);
+
+  const handleTerminalSubmit = useCallback((e) => {
+    e.preventDefault();
+    executeCommand(terminalInput);
+  }, [executeCommand, terminalInput]);
+
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+    if (terminalContainerRef.current) {
+      terminalContainerRef.current.scrollTop = terminalContainerRef.current.scrollHeight;
+    }
+  }, [terminalHistory]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const handleCopyEmail = useCallback(() => {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText('tridonjose.acacio@gsinfo.co.mz');
+      setCopiedEmail(true);
+      setTimeout(() => setCopiedEmail(false), 2500);
+    }
+  }, []);
 
   const handleFormSubmit = useCallback((e) => {
     e.preventDefault();
@@ -274,8 +306,8 @@ export default function App() {
             <div className={`w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full overflow-hidden border-2 ${currentTheme.border} bg-white flex items-center justify-center shadow-xs shrink-0`}>
               {!imgError ? (
                 <img 
-                  src="/img/perfil/tridonJ.jpeg" 
-                  alt="Tridon"
+                  src="/img/perfil/tridonJ_avatar.jpeg" 
+                  alt="Tridon José Acácio"
                   className="w-full h-full object-cover border-0 outline-none ring-0 shadow-none"
                   style={{ border: 'none', outline: 'none', boxShadow: 'none' }}
                   onError={() => setImgError(true)}
@@ -429,7 +461,7 @@ export default function App() {
               <div className="space-y-4 sm:space-y-5 min-h-[280px] sm:min-h-[300px] lg:min-h-[340px] flex flex-col justify-center">
 
                 <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border ${currentTheme.border} ${currentTheme.accentText} text-[10px] sm:text-[11px] font-bold shadow-xs self-center lg:self-start`}>
-                  <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                 
                   <span>{t.hero.badge}</span>
                 </div>
 
@@ -527,22 +559,30 @@ export default function App() {
               </div>
             </div>
 
-            <div className="lg:col-span-6 flex justify-center lg:justify-end order-first lg:order-last">
-              <div className="w-full max-w-[220px] xs:max-w-[260px] sm:max-w-xs md:max-w-sm lg:max-w-sm xl:max-w-md">
+            <div className="lg:col-span-6 flex justify-center items-center order-first lg:order-last">
+              <div className="w-full max-w-[310px] xs:max-w-[350px] sm:max-w-[390px] md:max-w-[430px] lg:max-w-[450px] relative">
                 {!imgError ? (
-                  <img 
-                    src="/img/perfil/tridonJ.jpeg" 
-                    alt="Tridon José Acácio - Software Architect" 
-                    className="block w-full h-auto max-w-full border-0 outline-none ring-0 shadow-none select-none pointer-events-none bg-transparent"
-                    style={{ border: 'none', outline: 'none', boxShadow: 'none', background: 'transparent' }}
-                    loading="eager"
-                    draggable={false}
-                    onError={() => setImgError(true)}
-                  />
+                  <div className="relative flex justify-center items-center">
+                    {/* Aura esverdeada / cor do tema no centro da imagem */}
+                    <div 
+                      className="absolute w-[95%] h-[95%] rounded-full opacity-35 blur-3xl pointer-events-none transition-opacity duration-700"
+                      style={{ background: `radial-gradient(circle, ${glowHex}, transparent 68%)` }}
+                    />
+
+                    {/* Silhueta recortada sem bordas, casaco 100% sólido sem gradiente branco */}
+                    <img 
+                      src="/img/perfil/tridonJ_clean_cutout.png" 
+                      alt="Tridon José Acácio - Software Architect" 
+                      className="relative z-10 block w-full h-auto object-contain select-none pointer-events-none filter drop-shadow-xl"
+                      loading="eager"
+                      draggable={false}
+                      onError={() => setImgError(true)}
+                    />
+                  </div>
                 ) : (
-                  <div className="w-full aspect-square flex flex-col items-center justify-center text-slate-500 gap-2">
-                    <User className="w-16 h-16 sm:w-20 sm:h-20" />
-                    <span className="text-[10px] sm:text-xs font-mono uppercase tracking-widest">Foto</span>
+                  <div className="w-full aspect-square flex flex-col items-center justify-center text-slate-500 gap-2 bg-slate-100 rounded-2xl border border-slate-200">
+                    <User className="w-16 h-16 sm:w-20 sm:h-20 text-slate-400" />
+                    <span className="text-[10px] sm:text-xs font-mono uppercase tracking-widest">Foto de Perfil</span>
                   </div>
                 )}
               </div>
@@ -653,7 +693,7 @@ export default function App() {
           <InfiniteSpiral
             items={TECHNOLOGIES}
             radius={260}
-            speed={0.12}
+            speed={0.28}
             cardWidth={150}
             cardHeight={72}
             glowHex={glowHex}
@@ -664,9 +704,12 @@ export default function App() {
       {/* ============================================================
           TERMINAL
       ============================================================ */}
-      <section id="terminal" className="py-14 sm:py-16 lg:py-20 bg-white border-t border-b border-slate-200">
+      {/* ============================================================
+          TERMINAL
+      ============================================================ */}
+      <section id="terminal" className="py-14 sm:py-16 lg:py-20 bg-slate-50/60 border-t border-b border-slate-200 scroll-mt-14">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
-          <div className="text-center max-w-xl mx-auto mb-8 sm:mb-10 space-y-2">
+          <div className="text-center max-w-xl mx-auto mb-6 sm:mb-8 space-y-2">
             <h2 className="text-lg xs:text-xl sm:text-2xl font-black text-slate-900 flex items-center justify-center gap-2">
               <Terminal className={`w-4 h-4 sm:w-5 sm:h-5 ${currentTheme.accentText}`} />
               <span>{t.terminalSection.title}</span>
@@ -674,30 +717,55 @@ export default function App() {
             <p className="text-slate-600 text-[11px] sm:text-xs font-light">{t.terminalSection.subtitle}</p>
           </div>
 
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl shadow-lg overflow-hidden font-mono text-[11px] sm:text-xs text-slate-100">
-            <div className="bg-slate-950 px-3 sm:px-4 py-2.5 sm:py-3 border-b border-slate-800 flex items-center gap-2">
-              <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-500"></div>
-              <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-yellow-500"></div>
-              <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-green-500"></div>
-              <span className="ml-1 sm:ml-2 text-[10px] sm:text-[11px] text-slate-400 truncate">tridon@clean-core:~</span>
+          {/* Atalhos Rápidos Clicáveis - Sem emojis */}
+          <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 mb-3">
+            {[
+              { cmd: 'ajuda', label: 'ajuda', icon: HelpCircle },
+              { cmd: 'whoami', label: 'whoami', icon: UserCheck },
+              { cmd: 'skills', label: 'skills', icon: Cpu },
+              { cmd: 'projetos', label: 'projetos', icon: FolderKanban },
+              { cmd: 'contato', label: 'contato', icon: Mail },
+              { cmd: 'clear', label: 'limpar', icon: Trash2 }
+            ].map(({ cmd, label, icon: Icon }) => (
+              <button
+                key={cmd}
+                type="button"
+                onClick={() => executeCommand(cmd)}
+                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white border border-slate-200 text-slate-700 hover:text-slate-900 hover:border-slate-400 text-[10px] sm:text-[11px] font-mono shadow-2xs transition-all hover:scale-105 active:scale-95 cursor-pointer"
+              >
+                <Icon className="w-3 h-3 text-slate-500" />
+                <span>{label}</span>
+              </button>
+            ))}
+          </div>
+
+          <div className="bg-slate-950 border border-slate-800 rounded-2xl shadow-xl overflow-hidden font-mono text-[11px] sm:text-xs text-slate-100">
+            <div className="bg-slate-900 px-3 sm:px-4 py-2.5 sm:py-3 border-b border-slate-800 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-500/80"></div>
+                <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-yellow-500/80"></div>
+                <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-green-500/80"></div>
+                <span className="ml-1 sm:ml-2 text-[10px] sm:text-[11px] text-slate-400 truncate">tridon@clean-core:~</span>
+              </div>
+              <span className="text-[10px] text-slate-500 font-mono hidden xs:inline">bash (interactive)</span>
             </div>
 
-            <div className="p-3 sm:p-5 h-40 sm:h-48 overflow-y-auto space-y-1.5 sm:space-y-2" aria-live="polite">
+            <div ref={terminalContainerRef} className="p-3 sm:p-5 h-44 sm:h-52 overflow-y-auto space-y-2 select-text" aria-live="polite">
               {terminalHistory.map((item, idx) => (
                 <div 
                   key={idx} 
                   className={`${
                     item.type === 'user' ? 'text-white font-bold' : 
                     item.type === 'system' ? 'text-emerald-400' : 'text-slate-300'
-                  } whitespace-pre-line break-words`}
+                  } whitespace-pre-line break-words leading-relaxed`}
                 >
                   {item.text}
                 </div>
               ))}
             </div>
 
-            <form onSubmit={handleTerminalSubmit} className="bg-slate-950 border-t border-slate-800 p-2.5 sm:p-3 flex items-center gap-2">
-              <span className="text-emerald-400 font-bold">$</span>
+            <form onSubmit={handleTerminalSubmit} className="bg-slate-900/95 border-t border-slate-800 p-2.5 sm:p-3 flex items-center gap-2">
+              <span className="text-emerald-400 font-bold font-mono">$</span>
               <input 
                 type="text" 
                 value={terminalInput}
@@ -706,7 +774,7 @@ export default function App() {
                 aria-label="Comando do terminal"
                 className="bg-transparent border-none outline-none flex-1 text-white text-[11px] sm:text-xs font-mono placeholder:text-slate-600 min-w-0"
               />
-              <button type="submit" className={`px-3 sm:px-4 py-1.5 rounded-lg ${currentTheme.primary} text-[11px] sm:text-xs shadow-xs shrink-0`}>
+              <button type="submit" className={`px-3 sm:px-4 py-1.5 rounded-lg ${currentTheme.primary} text-[11px] sm:text-xs shadow-xs shrink-0 cursor-pointer`}>
                 Run
               </button>
             </form>
@@ -715,11 +783,11 @@ export default function App() {
       </section>
 
       {/* ============================================================
-          CONTATO — SpotlightCard
+          CONTATO — SpotlightCard com espaçamento anti-sobreposição
       ============================================================ */}
-      <section id="contact" className="py-14 sm:py-16 lg:py-20 bg-white">
+      <section id="contact" className="py-14 sm:py-16 lg:py-20 bg-white pb-32 sm:pb-36 lg:pb-40 scroll-mt-14">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-16 space-y-2">
+          <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14 space-y-2">
             <h2 className="text-xl xs:text-2xl sm:text-3xl font-black text-slate-900">{t.contact.title}</h2>
             <p className="text-slate-600 text-xs sm:text-sm font-light px-2">{t.contact.subtitle}</p>
           </div>
@@ -732,32 +800,59 @@ export default function App() {
                 className="bg-white border border-slate-200 shadow-xs"
               >
                 <div className="p-5 sm:p-6 space-y-5 sm:space-y-6">
-                  <div className="flex items-start gap-3 sm:gap-4">
-                    <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white border border-slate-200 ${currentTheme.accentText} flex items-center justify-center shrink-0 shadow-xs`}>
-                      <Mail className="w-4 h-4" />
+                  {/* Email com botão de cópia com 1 clique */}
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="flex items-start gap-3 sm:gap-4 min-w-0">
+                      <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-50 border border-slate-200 ${currentTheme.accentText} flex items-center justify-center shrink-0 shadow-xs`}>
+                        <Mail className="w-4 h-4" />
+                      </div>
+                      <div className="min-w-0">
+                        <h3 className="font-bold text-slate-900 text-xs">{t.contact.email}</h3>
+                        <a href="mailto:tridonjose.acacio@gsinfo.co.mz" className="text-slate-600 text-[11px] sm:text-xs mt-0.5 font-light hover:text-slate-900 transition-colors break-all block">
+                          tridonjose.acacio@gsinfo.co.mz
+                        </a>
+                      </div>
                     </div>
-                    <div className="min-w-0">
-                      <h3 className="font-bold text-slate-900 text-xs">{t.contact.email}</h3>
-                      <a href="mailto:tridonjose.acacio@gsinfo.co.mz" className="text-slate-600 text-[11px] sm:text-xs mt-0.5 font-light hover:text-slate-900 transition-colors break-all">
-                        tridonjose.acacio@gsinfo.co.mz
-                      </a>
-                    </div>
+                    <button
+                      type="button"
+                      onClick={handleCopyEmail}
+                      title="Copiar e-mail"
+                      aria-label="Copiar endereço de e-mail"
+                      className="shrink-0 px-2.5 py-1.5 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 transition-all flex items-center gap-1.5 text-[10px] font-medium shadow-2xs cursor-pointer"
+                    >
+                      {copiedEmail ? (
+                        <>
+                          <Check className="w-3.5 h-3.5 text-emerald-600" />
+                          <span className="text-emerald-700 font-bold">Copiado</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-3.5 h-3.5 text-slate-500" />
+                          <span>Copiar</span>
+                        </>
+                      )}
+                    </button>
                   </div>
 
                   <div className="flex items-start gap-3 sm:gap-4">
-                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white border border-slate-200 text-emerald-600 flex items-center justify-center shrink-0 shadow-xs">
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-600 flex items-center justify-center shrink-0 shadow-xs">
                       <MessageCircle className="w-4 h-4" />
                     </div>
                     <div>
                       <h3 className="font-bold text-slate-900 text-xs">{t.contact.whatsapp}</h3>
-                      <a href="https://wa.me/258844883000" target="_blank" rel="noopener noreferrer" className="text-slate-600 text-[11px] sm:text-xs mt-0.5 font-light hover:text-slate-900 transition-colors">
+                      <a 
+                        href="https://wa.me/258844883000?text=Ol%C3%A1%20Tridon,%20gostaria%20de%20conversar%20sobre%20um%20projeto" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="text-slate-600 text-[11px] sm:text-xs mt-0.5 font-light hover:text-slate-900 transition-colors block"
+                      >
                         (+258) 84 488 3000
                       </a>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-3 sm:gap-4">
-                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white border border-slate-200 text-blue-600 flex items-center justify-center shrink-0 shadow-xs">
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-blue-50 border border-blue-200 text-blue-600 flex items-center justify-center shrink-0 shadow-xs">
                       <MapPin className="w-4 h-4" />
                     </div>
                     <div>
@@ -825,7 +920,7 @@ export default function App() {
                     ></textarea>
                   </div>
 
-                  <button type="submit" className={`w-full ${currentTheme.primary} py-3 rounded-full text-xs shadow-xs transition-all hover:scale-[1.01]`}>
+                  <button type="submit" className={`w-full ${currentTheme.primary} py-3 rounded-full text-xs shadow-xs transition-all hover:scale-[1.01] cursor-pointer`}>
                     {t.contact.form.submit}
                   </button>
                 </form>
@@ -887,7 +982,7 @@ export default function App() {
         className="hidden md:flex fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-40 pointer-events-none"
         aria-label="Dock de navegação rápida"
       >
-        <div className="pointer-events-auto flex items-end gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-2 sm:py-2.5 rounded-2xl bg-white/70 backdrop-blur-xl border border-slate-200/70 shadow-2xl shadow-slate-900/10">
+        <div className="pointer-events-auto flex items-end gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-2 sm:py-2.5 rounded-2xl bg-white/85 backdrop-blur-2xl border border-slate-200/90 shadow-2xl shadow-slate-950/15">
           {DOCK_ITEMS.map((item) => {
             const Icon = item.icon;
             const isActive = activeSection === item.id;
@@ -895,7 +990,7 @@ export default function App() {
             return (
               <div key={item.id} className="relative flex flex-col items-center">
                 <span
-                  className={`absolute -top-9 px-2 py-1 rounded-md text-[10px] font-bold whitespace-nowrap bg-slate-900 text-white shadow-lg transition-all duration-200 ${
+                  className={`absolute -top-9 px-2.5 py-1 rounded-lg text-[10px] font-mono uppercase tracking-wider font-bold whitespace-nowrap bg-slate-900 text-white shadow-xl transition-all duration-200 ${
                     isHovered ? 'opacity-100 -translate-y-0.5' : 'opacity-0 translate-y-0 pointer-events-none'
                   }`}
                 >
@@ -908,12 +1003,12 @@ export default function App() {
                   onMouseLeave={() => setHoveredDock(null)}
                   aria-label={getDockLabel(item)}
                   aria-current={isActive ? 'page' : undefined}
-                  className={`relative flex items-center justify-center rounded-xl transition-all duration-200 ease-out ${
+                  className={`relative flex items-center justify-center rounded-xl transition-all duration-200 ease-out cursor-pointer ${
                     isHovered ? 'scale-125 -translate-y-2' : 'scale-100 translate-y-0'
                   } ${
                     isActive 
                       ? `${currentTheme.primary} text-white shadow-lg` 
-                      : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+                      : 'bg-slate-100 hover:bg-slate-200/80 text-slate-700'
                   } w-10 h-10 sm:w-11 sm:h-11`}
                 >
                   <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -931,12 +1026,20 @@ export default function App() {
       </nav>
 
       {/* ============================================================
-          FOOTER
+          FOOTER - Padrão Corporativo Escuro Sem Emojis
       ============================================================ */}
-      <footer className={`${BG} text-slate-600 border-t border-slate-300 py-6 sm:py-8 text-center text-xs pb-24 md:pb-28`}>
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 space-y-2">
-          <span className="font-mono text-xs font-bold text-slate-900">Tridon José Acácio</span>
-          <p className="font-light text-[10px] sm:text-[11px]">© {new Date().getFullYear()} Tridon José Acácio. Todos os direitos reservados.</p>
+      <footer className="bg-slate-950 text-slate-400 border-t border-slate-800 py-10 sm:py-12 text-center text-xs pb-28 sm:pb-36">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 space-y-3">
+          <div className="flex items-center justify-center gap-2">
+            <TerminalSquare className={`w-4 h-4 ${currentTheme.accentText}`} />
+            <span className="font-mono text-xs font-bold text-white tracking-wide">Tridon José Acácio</span>
+          </div>
+          <p className="text-slate-400 text-[11px] max-w-md mx-auto font-light leading-relaxed">
+            {lang === 'en' 
+              ? 'Enterprise Software Architecture, Offline-First Systems & High Availability Backend Solutions.' 
+              : 'Arquitetura de Software Corporativo, Sistemas Offline-First e Soluções Backend de Alta Disponibilidade.'}
+          </p>
+          <p className="text-slate-500 font-mono text-[10px] pt-1">© {new Date().getFullYear()} Tridon José Acácio. {t.footer.rights}</p>
         </div>
       </footer>
 

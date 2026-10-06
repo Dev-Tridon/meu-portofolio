@@ -1,14 +1,21 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   background-color: #ffffff;
   color: #0f172a;
   font-size: 14px;
 }
+
 
 /* Ocultar barra de rolagem nos carrosséis mantendo a funcionalidade */
 .no-scrollbar::-webkit-scrollbar {
