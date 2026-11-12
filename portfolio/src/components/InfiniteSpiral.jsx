@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 /**
  * InfiniteSpiral — carrossel infinito em espiral 3D
@@ -21,11 +21,12 @@ const InfiniteSpiral = ({
   const [angle, setAngle] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const rafRef = useRef(null);
-  const lastTimeRef = useRef(performance.now());
+  const lastTimeRef = useRef(0);
 
   // Rotação contínua
   useEffect(() => {
     const animate = (now) => {
+      if (lastTimeRef.current === 0) lastTimeRef.current = now;
       const dt = now - lastTimeRef.current;
       lastTimeRef.current = now;
       if (!isPaused) {

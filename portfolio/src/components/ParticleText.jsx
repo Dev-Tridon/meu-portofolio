@@ -44,7 +44,9 @@ const waitForFonts = async font => {
 
   try {
     await document.fonts.load(font);
-  } catch {}
+  } catch {
+    /* ignore font load error */
+  }
 
   await document.fonts.ready;
 };

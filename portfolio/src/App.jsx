@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { 
-  Code, Rocket, Mail, User, Monitor, Smartphone, Database, 
-  MapPin, MessageCircle, CheckCircle, Terminal, Server, Layers, 
+  Rocket, Mail, User, Monitor, Smartphone, Database, 
+  MapPin, MessageCircle, CheckCircle, Terminal, 
   TerminalSquare, Eye, ArrowRight, Menu, X, Sparkles, 
   ChevronLeft, ChevronRight, ArrowLeft, Home, FolderKanban, 
   Cpu, MessageSquare,
@@ -32,7 +32,7 @@ const PROJECTS_DATA = [
   { 
     key: 'project3', 
     icon: Database, 
-    image: '/img/projetos/img4.jpg', 
+    image: '/img/projetos/progecto3.jpg', 
     tech: 'Spring Boot + Node.js + Redis', 
     arch: 'Multi-tenant isolated database backend design.' 
   }
@@ -55,16 +55,16 @@ const TECHNOLOGIES = [
 ];
 
 const NAV_ITEMS = ['home', 'projects', 'expertise', 'terminal', 'contact'];
-const THEME_COLORS = { emerald: 'bg-emerald-600', blue: 'bg-blue-600', violet: 'bg-violet-600' };
+const THEME_COLORS = { platinum: 'bg-slate-700', blue: 'bg-blue-600', emerald: 'bg-emerald-600' };
 
 // Cor hex do tema (para glow/spotlight)
 const THEME_HEX = {
-  emerald: '#10b981',
-  blue:    '#3b82f6',
-  violet:  '#8b5cf6'
+  platinum: '#64748b',
+  blue:     '#3b82f6',
+  emerald:  '#10b981'
 };
 
-const BG = 'bg-[#e6e6e6]';
+const BG = 'bg-[#b4bac8]';
 
 const DOCK_ITEMS = [
   { id: 'home',      icon: Home,          labelPt: 'Início',    labelEn: 'Home' },
@@ -76,7 +76,7 @@ const DOCK_ITEMS = [
 
 export default function App() {
   const [lang, setLang] = useState('pt');
-  const [themeKey, setThemeKey] = useState('emerald');
+  const [themeKey, setThemeKey] = useState('platinum');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -121,10 +121,6 @@ export default function App() {
     }, 6000);
     return () => clearInterval(interval);
   }, [isPaused, totalSlides]);
-
-  useEffect(() => {
-    setHeroIndex(0);
-  }, [lang]);
 
   const goNext = useCallback(() => {
     setHeroIndex((prev) => (prev + 1) % totalSlides);
@@ -219,7 +215,7 @@ export default function App() {
       skills: 'Stack: React, Vite, Electron, Java Spring Boot, Node.js, PostgreSQL, Redis.',
       projetos: '1. GSInfo Desktop Suite | 2. Garçom Digital PWA | 3. Core Multi-tenant',
       projects: '1. GSInfo Desktop Suite | 2. Garçom Digital PWA | 3. Core Multi-tenant',
-      contato: 'Email: tridonjose.acacio@gsinfo.co.mz | WhatsApp: +258 84 488 3000',
+      contato: 'Email: info@intebrio.com | Tel: +258 878051058 | WhatsApp: +258 844883000',
       status: 'Sistema Operacional: 100% Estável | Servidor: Maputo-01',
     };
 
@@ -274,7 +270,7 @@ export default function App() {
             <div className={`w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full overflow-hidden border-2 ${currentTheme.border} bg-white flex items-center justify-center shadow-xs shrink-0`}>
               {!imgError ? (
                 <img 
-                  src="/img/perfil/tridonJ.jpeg" 
+                  src="/img/perfil/tridon.jpg" 
                   alt="Tridon"
                   className="w-full h-full object-cover border-0 outline-none ring-0 shadow-none"
                   style={{ border: 'none', outline: 'none', boxShadow: 'none' }}
@@ -329,7 +325,7 @@ export default function App() {
               {['pt', 'en'].map((l) => (
                 <button 
                   key={l}
-                  onClick={() => setLang(l)} 
+                  onClick={() => { setLang(l); setHeroIndex(0); }} 
                   aria-pressed={lang === l}
                   className={`px-2 py-0.5 text-[10px] lg:text-[11px] font-bold uppercase rounded-lg transition-all ${
                     lang === l ? `${currentTheme.primary} shadow-xs` : 'text-slate-600 hover:text-slate-900'
@@ -389,7 +385,7 @@ export default function App() {
                 {['pt', 'en'].map((l) => (
                   <button 
                     key={l}
-                    onClick={() => setLang(l)} 
+                    onClick={() => { setLang(l); setHeroIndex(0); }} 
                     className={`px-3 py-1 text-xs font-bold uppercase rounded-lg transition-all ${
                       lang === l ? `${currentTheme.primary} shadow-xs` : 'text-slate-600'
                     }`}
@@ -531,7 +527,7 @@ export default function App() {
               <div className="w-full max-w-[220px] xs:max-w-[260px] sm:max-w-xs md:max-w-sm lg:max-w-sm xl:max-w-md">
                 {!imgError ? (
                   <img 
-                    src="/img/perfil/tridonJ.jpeg" 
+                    src="/img/perfil/tridon.jpg" 
                     alt="Tridon José Acácio - Software Architect" 
                     className="block w-full h-auto max-w-full border-0 outline-none ring-0 shadow-none select-none pointer-events-none bg-transparent"
                     style={{ border: 'none', outline: 'none', boxShadow: 'none', background: 'transparent' }}
@@ -688,8 +684,9 @@ export default function App() {
                   key={idx} 
                   className={`${
                     item.type === 'user' ? 'text-white font-bold' : 
-                    item.type === 'system' ? 'text-emerald-400' : 'text-slate-300'
+                    item.type === 'system' ? '' : 'text-slate-300'
                   } whitespace-pre-line break-words`}
+                  style={item.type === 'system' ? { color: glowHex } : undefined}
                 >
                   {item.text}
                 </div>
@@ -697,7 +694,7 @@ export default function App() {
             </div>
 
             <form onSubmit={handleTerminalSubmit} className="bg-slate-950 border-t border-slate-800 p-2.5 sm:p-3 flex items-center gap-2">
-              <span className="text-emerald-400 font-bold">$</span>
+              <span className="font-bold" style={{ color: glowHex }}>$</span>
               <input 
                 type="text" 
                 value={terminalInput}
@@ -745,7 +742,7 @@ export default function App() {
                   </div>
 
                   <div className="flex items-start gap-3 sm:gap-4">
-                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white border border-slate-200 text-emerald-600 flex items-center justify-center shrink-0 shadow-xs">
+                    <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white border border-slate-200 ${currentTheme.accentText} flex items-center justify-center shrink-0 shadow-xs`}>
                       <MessageCircle className="w-4 h-4" />
                     </div>
                     <div>
@@ -757,7 +754,7 @@ export default function App() {
                   </div>
 
                   <div className="flex items-start gap-3 sm:gap-4">
-                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white border border-slate-200 text-blue-600 flex items-center justify-center shrink-0 shadow-xs">
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white border border-slate-200 ${currentTheme.accentText} flex items-center justify-center shrink-0 shadow-xs">
                       <MapPin className="w-4 h-4" />
                     </div>
                     <div>
@@ -778,7 +775,7 @@ export default function App() {
                 <form onSubmit={handleFormSubmit} className="p-5 sm:p-6 space-y-4 relative">
                   {formSubmitted && (
                     <div className="absolute inset-0 bg-white/95 backdrop-blur-xs rounded-2xl flex flex-col items-center justify-center p-6 text-center z-20" role="status">
-                      <CheckCircle className="w-10 h-10 sm:w-12 sm:h-12 text-emerald-600 mb-3 animate-bounce" />
+                      <CheckCircle className={`w-10 h-10 sm:w-12 sm:h-12 ${currentTheme.accentText} mb-3 animate-bounce`} />
                       <h3 className="text-base sm:text-lg font-bold text-slate-900 mb-1">Sucesso!</h3>
                       <p className="text-slate-600 text-xs font-light">{t.contact.form.success}</p>
                     </div>

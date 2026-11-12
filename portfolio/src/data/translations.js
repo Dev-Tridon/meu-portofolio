@@ -56,7 +56,7 @@ export const translations = {
       subtitle: "Entre em contato direto para consultorias arquiteturais ou novos desafios corporativos.",
       email: "Email Profissional",
       whatsapp: "WhatsApp Direto",
-      location: "Maputo, Moçambique / Remoto Global",
+      location: "Patrice Matola, Maputo / Remoto Global",
       form: {
         name: "Seu Nome",
         email: "Seu Email",
@@ -127,7 +127,7 @@ export const translations = {
       subtitle: "Get in touch directly for architectural consultancies or new corporate challenges.",
       email: "Professional Email",
       whatsapp: "Direct WhatsApp",
-      location: "Maputo, Mozambique / Global Remote",
+      location: "Patrice Matola, Maputo / Global Remote",
       form: {
         name: "Your Name",
         email: "Your Email",
@@ -144,13 +144,13 @@ export const translations = {
 };
 
 export const themes = {
-  emerald: { 
-    name: 'Emerald Corporate', 
-    primary: 'bg-emerald-600 hover:bg-emerald-700 text-white font-bold shadow-emerald-600/20', 
-    accentText: 'text-emerald-700',
-    border: 'border-emerald-600/30',
-    lightBg: 'bg-emerald-50',
-    ring: 'focus:ring-emerald-500'
+  platinum: { 
+    name: 'Platinum Studio', 
+    primary: 'bg-slate-700 hover:bg-slate-800 text-white font-bold shadow-slate-700/20', 
+    accentText: 'text-slate-700',
+    border: 'border-slate-300',
+    lightBg: 'bg-slate-50',
+    ring: 'focus:ring-slate-500'
   },
   blue: { 
     name: 'Executive Blue', 
@@ -160,12 +160,12 @@ export const themes = {
     lightBg: 'bg-blue-50',
     ring: 'focus:ring-blue-500'
   },
-  violet: { 
-    name: 'Deep Violet', 
-    primary: 'bg-violet-600 hover:bg-violet-700 text-white font-bold shadow-violet-600/20', 
-    accentText: 'text-violet-700',
-    border: 'border-violet-600/30',
-    lightBg: 'bg-violet-50',
-    ring: 'focus:ring-violet-500'
+  emerald: { 
+    name: 'Emerald Corporate', 
+    primary: 'bg-emerald-600 hover:bg-emerald-700 text-white font-bold shadow-emerald-600/20', 
+    accentText: 'text-emerald-700',
+    border: 'border-emerald-600/30',
+    lightBg: 'bg-emerald-50',
+    ring: 'focus:ring-emerald-500'
   }
 };
